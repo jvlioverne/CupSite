@@ -15,6 +15,10 @@
 		8BD548521A9393F400C483B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BD548511A9393F400C483B7 /* Images.xcassets */; };
 		8BD548551A9393F400C483B7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD548531A9393F400C483B7 /* LaunchScreen.xib */; };
 		8BD548611A9393F400C483B7 /* CupSiteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD548601A9393F400C483B7 /* CupSiteTests.m */; };
+		8BD5486C1A94294B00C483B7 /* HomeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5486B1A94294A00C483B7 /* HomeTable.m */; };
+		8BD5486F1A94298100C483B7 /* CellTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5486E1A94298100C483B7 /* CellTable.m */; };
+		8BD5488D1A942DDC00C483B7 /* img_antro.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5488C1A942DDC00C483B7 /* img_antro.jpg */; };
+		8BD5488F1A94300700C483B7 /* img_antro2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5488E1A94300700C483B7 /* img_antro2.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,12 @@
 		8BD5485A1A9393F400C483B7 /* CupSiteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CupSiteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BD5485F1A9393F400C483B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BD548601A9393F400C483B7 /* CupSiteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CupSiteTests.m; sourceTree = "<group>"; };
+		8BD5486A1A94294A00C483B7 /* HomeTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTable.h; sourceTree = "<group>"; };
+		8BD5486B1A94294A00C483B7 /* HomeTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTable.m; sourceTree = "<group>"; };
+		8BD5486D1A94298100C483B7 /* CellTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellTable.h; sourceTree = "<group>"; };
+		8BD5486E1A94298100C483B7 /* CellTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellTable.m; sourceTree = "<group>"; };
+		8BD5488C1A942DDC00C483B7 /* img_antro.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_antro.jpg; sourceTree = SOURCE_ROOT; };
+		8BD5488E1A94300700C483B7 /* img_antro2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_antro2.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +93,14 @@
 		8BD548401A9393F400C483B7 /* CupSite */ = {
 			isa = PBXGroup;
 			children = (
+				8BD5488E1A94300700C483B7 /* img_antro2.jpg */,
+				8BD5488C1A942DDC00C483B7 /* img_antro.jpg */,
 				8BD548451A9393F400C483B7 /* AppDelegate.h */,
 				8BD548461A9393F400C483B7 /* AppDelegate.m */,
+				8BD5486A1A94294A00C483B7 /* HomeTable.h */,
+				8BD5486B1A94294A00C483B7 /* HomeTable.m */,
+				8BD5486D1A94298100C483B7 /* CellTable.h */,
+				8BD5486E1A94298100C483B7 /* CellTable.m */,
 				8BD5484B1A9393F400C483B7 /* ViewController.h */,
 				8BD5484C1A9393F400C483B7 /* ViewController.m */,
 				8BD5484E1A9393F400C483B7 /* Main.storyboard */,
@@ -202,7 +218,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BD5488D1A942DDC00C483B7 /* img_antro.jpg in Resources */,
 				8BD548501A9393F400C483B7 /* Main.storyboard in Resources */,
+				8BD5488F1A94300700C483B7 /* img_antro2.jpg in Resources */,
 				8BD548551A9393F400C483B7 /* LaunchScreen.xib in Resources */,
 				8BD548521A9393F400C483B7 /* Images.xcassets in Resources */,
 			);
@@ -224,7 +242,9 @@
 			files = (
 				8BD548471A9393F400C483B7 /* AppDelegate.m in Sources */,
 				8BD548441A9393F400C483B7 /* main.m in Sources */,
+				8BD5486F1A94298100C483B7 /* CellTable.m in Sources */,
 				8BD5484D1A9393F400C483B7 /* ViewController.m in Sources */,
+				8BD5486C1A94294B00C483B7 /* HomeTable.m in Sources */,
 				8BD5484A1A9393F400C483B7 /* CupSite.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
