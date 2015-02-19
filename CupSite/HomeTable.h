@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeTable : UITableViewController
+
+
+@interface HomeTable : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *TableView;
 
