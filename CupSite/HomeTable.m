@@ -14,6 +14,11 @@
 NSMutableArray *nombreArray;
 NSMutableArray *imgArray;
 NSMutableArray *descArray;
+NSMutableArray *datosArray;
+
+NSString *userID;
+
+NSDictionary *jsonResponse;
 
 @interface HomeTable ()
 
@@ -23,13 +28,13 @@ NSMutableArray *descArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+    
     [self initController];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    [self postService];
+    //[self.TableView reloadData];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,11 +45,16 @@ NSMutableArray *descArray;
 
 -(void)initController
 {
-    nombreArray         =  [NSMutableArray arrayWithObjects: @"Walter González", @"Alejandra Bautista", @"Augusto Bustamante", @"José Chávez", @"Alberto Cordero", nil];
+    [self postService];
+    [self.TableView reloadData];
+    
+    /*nombreArray         =  [NSMutableArray arrayWithObjects: @"Walter González", @"Alejandra Bautista", @"Augusto Bustamante", @"José Chávez", @"Alberto Cordero", nil];
     
     imgArray          =  [NSMutableArray arrayWithObjects: @"img_antro.jpg", @"img_antro2.jpg", @"img_antro.jpg", @"img_antro2.jpg", @"img_antro.jpg", @"img_antro2.jpg", nil];
     
-    descArray          =  [NSMutableArray arrayWithObjects: @"Profesor Curso", @"Alumna Guapa", @"Amigo Estudioso", @"Alumno Travieso", @"Alumno Inteligente", nil];
+    descArray          =  [NSMutableArray arrayWithObjects: @"Profesor Curso", @"Alumna Guapa", @"Amigo Estudioso", @"Alumno Travieso", @"Alumno Inteligente", nil]; */
+    
+    userID = @"1";
     
 }
 
@@ -80,7 +90,8 @@ Table Functions
     
     cell.nomAntro.text             = nombreArray[indexPath.row];
     cell.domicilioAntro.text       = descArray[indexPath.row];
-    cell.imgAntro.image      = [UIImage imageNamed:imgArray[indexPath.row]];
+    cell.datosAntro.text       = datosArray[indexPath.row];
+    cell.imgAntro.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgArray[indexPath.row]]]];
     
     return cell;
 }
@@ -143,11 +154,13 @@ Table Functions
 
 - (IBAction)btnReload:(id)sender {
     
-    
+    [self postService];
+    [self.TableView reloadData];
 }
 
 
-}
+
+
 //terminar de ver el video y revisar mi implementacion
 /*******************************************************************************
  Web Service
@@ -167,7 +180,7 @@ Table Functions
     {
         NSString *post = [[NSString alloc] initWithFormat:@"id=%@", userID];
         NSLog(@"postService: %@",post);
-        NSURL *url = [NSURL URLWithString:@"http://ec2-54-69-246-127.us-west-2.compute.amazonaws.com/"];
+        NSURL *url = [NSURL URLWithString:@"http://ec2-54-148-110-64.us-west-2.compute.amazonaws.com/"];
         NSLog(@"URL postService = %@", url);
         NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
@@ -207,8 +220,23 @@ Table Functions
     }
     //-------------------------------------------------------------------------------
     NSLog(@"jsonResponse %@", jsonResponse);
-    maNames         = [jsonResponse valueForKey:@"Name"];
-    NSLog(@"maNames %@", maNames);
+    
+    
+    
+//    NSURL *myURL = [[NSURL alloc]initWithString:jsonResponse valueForKey:@"imagen"];
+    
+    nombreArray         = [jsonResponse valueForKey:@"Name"];
+    descArray           = [jsonResponse valueForKey:@"address"];
+    imgArray            = [jsonResponse valueForKey:@"imagen"];
+    datosArray          = [jsonResponse valueForKey:@"Surname"];
+
+    
+    
+    
+    
+    NSLog(@"nombreArray %@", nombreArray);
+
+    [self.TableView reloadData];
     //[self.tblMain reloadData];
 }
 

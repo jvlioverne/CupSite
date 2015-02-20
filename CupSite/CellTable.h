@@ -12,5 +12,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgAntro;
 @property (strong, nonatomic) IBOutlet UILabel *nomAntro;
 @property (strong, nonatomic) IBOutlet UILabel *domicilioAntro;
+@property (strong, nonatomic) IBOutlet UILabel *datosAntro;
 
 @end
