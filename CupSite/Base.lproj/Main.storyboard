@@ -153,8 +153,32 @@
                     <view key="view" contentMode="scaleToFill" id="XO7-C0-BR0">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="tRJ-Nr-Dg4" userLabel="ViewMap">
+                                <rect key="frame" x="0.0" y="98" width="768" height="844"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3X8-iR-E8L" userLabel="btnVerMapa">
+                                <rect key="frame" x="266" y="60" width="236" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" title="Ver mapa">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnVerMapaPressed:" destination="mDe-o9-cHr" eventType="touchUpInside" id="T4c-T5-3U6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90242266414141414" green="0.90242266414141414" blue="0.90242266414141414" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="ViewMap" destination="tRJ-Nr-Dg4" id="lAk-k2-Pqz"/>
+                        <outlet property="btnVerMapa" destination="3X8-iR-E8L" id="MRE-uG-hnn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yis-0L-ucf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

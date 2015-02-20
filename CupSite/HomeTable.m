@@ -11,10 +11,7 @@
 #import "SBJson.h"
 
 
-NSMutableArray *nombreArray;
-NSMutableArray *imgArray;
-NSMutableArray *descArray;
-NSMutableArray *datosArray;
+
 
 NSString *userID;
 

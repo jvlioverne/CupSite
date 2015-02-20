@@ -13,6 +13,8 @@ NSString *strUserLocation;
 float mlatitude;
 float mlongitude;
 
+GMSMapView *mapView;
+
 
 @interface GoogleMapsView ()
 
@@ -20,13 +22,12 @@ float mlongitude;
 
 @implementation GoogleMapsView
 
-{
-    GMSMapView *mapView_;
-}
+
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.btnVerMapa.titleLabel.text =@"Ver Mapa";
     // Do any additional setup after loading the view.
     //-------------------------------------------------------------------------------
     //Location
@@ -39,29 +40,58 @@ float mlongitude;
     
     [self.locationManager startUpdatingLocation];
     
+    
+}
+
+- (void)paintMap
+{
+    //-------------------------------------------------------------------------------
+    //Google Maps
+    // Create a GMSCameraPosition that tells the map to display the
+    // coordinate -33.86,151.20 at zoom level 6.
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:mlatitude
+                                                            longitude:mlongitude
+                                                                 zoom:16];
+    mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView.frame = CGRectMake(0, 0, self.ViewMap.frame.size.width, self.ViewMap.frame.size.height);
+    mapView.myLocationEnabled = YES;
+    
+    // Creates a marker in the center of the map.
+    
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake(mlatitude, mlongitude);
+    marker.title = @"Usted está aqui";
+    marker.snippet = @"A disfrutar la vista";
+    marker.map = mapView;
+    [self.ViewMap addSubview:mapView];
+    
+}
+
+
+
+
     //-------------------------------------------------------------------------------
    
     // Create a GMSCameraPosition that tells the map to display the
     
     // coordinate -33.86,151.20 at zoom level 6.
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
-                                                            longitude:151.20
-                                                                 zoom:10];
-    mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
-    mapView_.myLocationEnabled = YES;
-    self.view = mapView_;
+   // GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:mlatitude
+   //                                                         longitude:mlongitude
+     //                                                            zoom:10];
+    //mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    //mapView_.myLocationEnabled = YES;
+    //self.view = mapView_;
     
     // Creates a marker in the center of the map.
-    GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(-33.86, 151.20);
-    marker.title = @"Sydney";
-    marker.snippet = @"Australia";
-    marker.map = mapView_;
+    //GMSMarker *marker = [[GMSMarker alloc] init];
     
+    ///marker.position = CLLocationCoordinate2DMake(mlatitude, mlongitude);
+    //marker.title = @"Usted está aqui";
+    //marker.snippet = @"Disfrutar la vista";
+    //marker.map = mapView_;
     
-    
-    
-}
+
+//}
 
 
 
@@ -108,7 +138,12 @@ float mlongitude;
          //[mUserDefaults setObject: [[NSNumber numberWithFloat:mlatitude] stringValue] forKey: pmstrLatitude];
          NSLog(@"mlatitude = %f", mlatitude);
          NSLog(@"mlongitude = %f", mlongitude);
+         //self.btnVerMapa.titleLabel.textColor = [UIColor blueColor];
+         self.btnVerMapa.titleLabel.text =@"Ver Mapa";
+         
      }];
+    
+    
 }
 
 
@@ -116,4 +151,7 @@ float mlongitude;
 
 
 
+- (IBAction)btnVerMapaPressed:(id)sender {
+    [self paintMap];
+}
 @end

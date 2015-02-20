@@ -9,6 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+NSMutableArray *nombreArray;
+NSMutableArray *imgArray;
+NSMutableArray *descArray;
+NSMutableArray *datosArray;
+NSMutableArray *latArray;
+NSMutableArray *lonArray;
+
+
+
+
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -19,6 +30,8 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+
+
 
 
 @end

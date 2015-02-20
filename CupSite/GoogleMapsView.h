@@ -14,5 +14,8 @@
 
 @property(strong, nonatomic)CLLocationManager   *locationManager;
 @property(strong, nonatomic)CLLocation          *location;
+@property (strong, nonatomic) IBOutlet UIButton *btnVerMapa;
+- (IBAction)btnVerMapaPressed:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *ViewMap;
 
 @end
