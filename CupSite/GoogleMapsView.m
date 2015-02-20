@@ -8,10 +8,19 @@
 
 #import "GoogleMapsView.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "SBJson.h"
+#import "AppDelegate.h"
 
 NSString *strUserLocation;
+NSDictionary    *jsonResponse;
+NSString    *userID;
+
+
 float mlatitude;
 float mlongitude;
+int i;
+int cont;
+
 
 GMSMapView *mapView;
 
@@ -40,7 +49,7 @@ GMSMapView *mapView;
     
     [self.locationManager startUpdatingLocation];
     
-    
+    [self loadService];
 }
 
 - (void)paintMap
@@ -52,17 +61,34 @@ GMSMapView *mapView;
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:mlatitude
                                                             longitude:mlongitude
                                                                  zoom:16];
+    NSLog(@"contador %d", cont);
+    
     mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView.frame = CGRectMake(0, 0, self.ViewMap.frame.size.width, self.ViewMap.frame.size.height);
     mapView.myLocationEnabled = YES;
     
+
+    
     // Creates a marker in the center of the map.
     
+    for (i=0; i<cont; i++)
+    {
+    
+        
+//        marker.position = CLLocationCoordinate2DMake([maLatitud[i] floatValue], [maLongitud[i] floatValue]);
+        
+        
     GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(mlatitude, mlongitude);
-    marker.title = @"Usted está aqui";
-    marker.snippet = @"A disfrutar la vista";
+    marker.position = CLLocationCoordinate2DMake([latArray[i] floatValue], [lonArray[i] floatValue]);
+    marker.title = nombreArray[i];
+    marker.snippet = datosArray[i];
+    
+//        marker.title = @"Usted está aqui";
+//        marker.snippet = @"A disfrutar la vista";
+
+        
     marker.map = mapView;
+    }
     [self.ViewMap addSubview:mapView];
     
 }
@@ -146,6 +172,68 @@ GMSMapView *mapView;
     
 }
 
+- (void) loadService
+{
+    @try
+    {
+        NSString *post = [[NSString alloc] initWithFormat:@"id=%@", userID];
+        NSLog(@"postService: %@",post);
+        NSURL *url = [NSURL URLWithString:@"http://ec2-54-148-110-64.us-west-2.compute.amazonaws.com/"];
+        NSLog(@"URL postService = %@", url);
+        NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:postData];
+        [NSURLRequest requestWithURL:url];
+        NSError *error = [[NSError alloc] init];
+        NSHTTPURLResponse *response = nil;
+        NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        //-------------------------------------------------------------------------------
+        if ([response statusCode] >=200 && [response statusCode] <300)
+        {
+            jsonResponse = [NSJSONSerialization JSONObjectWithData:urlData options:kNilOptions error:&error];
+        }
+        else
+        {
+            if (error)
+            {
+                NSLog(@"Error");
+                
+            }
+            else
+            {
+                NSLog(@"Conect Fail");
+            }
+        }
+        //-------------------------------------------------------------------------------
+    }
+    @catch (NSException * e)
+    {
+        NSLog(@"Exception");
+    }
+    //-------------------------------------------------------------------------------
+    NSLog(@"jsonResponse %@", jsonResponse);
+    
+    
+    nombreArray         = [jsonResponse valueForKey:@"Name"];
+    cont                = nombreArray.count;
+    datosArray          = [jsonResponse valueForKey:@"Surname"];
+    latArray            = [jsonResponse valueForKey:@"lat"];
+    lonArray            = [jsonResponse valueForKey:@"lon"];
+    
+    NSLog(@"nombreArray %@", nombreArray);
+    NSLog(@"datosArray %@", datosArray);
+    NSLog(@"latArray %@", latArray);
+    NSLog(@"lonArray %@", lonArray);
+}
+
+
+
 
 
 
@@ -154,4 +242,7 @@ GMSMapView *mapView;
 - (IBAction)btnVerMapaPressed:(id)sender {
     [self paintMap];
 }
+
+
+
 @end
